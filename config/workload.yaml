@@ -1,34 +1,21 @@
 apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
-  name: tanzu-java-web-app
+  name: external-server-xml
   labels:
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/part-of: tanzu-java-web-app
-    apps.tanzu.vmware.com/has-tests: "true"
-    tanzu.app.live.view: "true"
-    tanzu.app.live.view.application.name: tanzu-java-web-app
-    apis.apps.tanzu.vmware.com/register-api: "true"
-  annotations:
-    autoscaling.knative.dev/minScale: "1"
+    #apps.tanzu.vmware.com/has-tests: "true"
+    #apis.apps.tanzu.vmware.com/register-api: "true"
 spec:
-  params:
-  - name: testing_pipeline_matching_labels
-    value:
-      apps.tanzu.vmware.com/pipeline: test
-      apps.tanzu.vmware.com/language: java
-  - name: api_descriptor
-    value:
-      type: openapi
-      location:
-        path: "/v3/api-docs"
-      system: dev
-      owner: team-a
-      description: "A set of API endpoints."
+  # build:
+  #   env:
+  #     - name: BP_JAVA_APP_SERVER
+  #       value: tomcat
+  #     - name: BP_TOMCAT_EXT_CONF_URI
+  #       value: "https://s3.ap-northeast-2.amazonaws.com/hshin-share.s3.tanzukorea.xyz/tomcat-conf.tgz"
   source:
     git:
-      url: https://github.com/haewons-tanzu/tanzu-java-web-app
+      url: https://github.com/haewons-tanzu/app-with-external-tomcat
       ref:
         branch: master
-
-
